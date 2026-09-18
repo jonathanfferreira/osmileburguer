@@ -7,6 +7,8 @@ const html=readFileSync('dist/index.html','utf8');
 const script=readFileSync('dist/app.js','utf8');
 const css=readFileSync('dist/style.css','utf8');
 assert.equal(html,renderSite(),'Generated HTML is current');
+assert(!/[✳✦★↗↓↑↕⟷⤴]/.test(html),'Visual symbols are SVGs, never platform emojis');
+assert((html.match(/<svg class="icon /g)||[]).length>=20,'Visual icons are rendered as inline SVG');
 assert.equal((html.match(/<h1\b/g)||[]).length,1);
 assert.equal(burgerLayers.length,9);
 for(const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)){
