@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://osmileburguer.vercel.app/sitemap.xml

@@ -1,0 +1,34 @@
+{
+  "tool": "Built-in imagegen",
+  "briefs": [
+    {
+      "key": "smile_hero_v2",
+      "args": {
+        "referenced_image_paths": [
+          "C:\\Antigravity\\osmilebuguer\\gargalhada.png"
+        ],
+        "prompt": "Use case: background-extraction. Edit target: the supplied REAL Gargalhada burger photograph. Produce a faithful transparent-background cutout of this exact burger only. Preserve the precise bun shape, uneven diced bacon, thick pineapple slice, yellow cheddar, beef patty and overflowing white garlic mayonnaise, all textures, proportions and camera viewpoint. Remove the entire background and supporting hand without changing the burger. No extra ingredients, no reconstructed generic burger, no text, no stylization. The burger fully visible, closely framed with 5% margin. Genuine alpha transparency; no checkered backdrop or ground shadow. This asset is used large in an existing restaurant website. Preserve identity aggressively."
+      }
+    },
+    {
+      "key": "smile_exploded_v2",
+      "args": {
+        "referenced_image_paths": [
+          "C:\\Antigravity\\osmilebuguer\\rachando o bico.png"
+        ],
+        "prompt": "Use case: precise-object-edit. Create ONE exploded-view photo composition / animation sprite of the supplied Rachando o Bico burger. Use the real photograph as the reference for its ingredients, textures, scale, lighting and front-facing camera viewpoint. Vertically separate its NINE ingredient layers with substantial clean transparent gaps, a single centered column, portrait 2:3 composition, consistent frontal slightly elevated viewpoint. From top to bottom EXACTLY: 1 golden smooth brioche top bun with no sesame, 2 crisp pale-green iceberg lettuce, 3 a few thin purple-red onion rings, 4 two ripe red tomato slices, 5 a thin amber pepper jam spread with small red flecks, 6 one melted pale ivory mozzarella cheese slice (NOT orange cheddar), 7 ONE irregular grilled artisan beef patty 130g, 8 thin white garlic mayonnaise spread, 9 golden brioche bottom bun. Nine cleanly isolated whole ingredients, each separated by empty alpha space from every other ingredient. No hands, plate, scenery, text, labels, arrows, cast shadows in empty gaps, extra bun, duplicate patty, bacon, pineapple, ketchup, sesame or generic ingredients. Do not make thick slabs of sauces. Maintain the real burger's ingredient character and natural imperfections, not a synthetic stock fast-food burger. Restore only occluded surfaces necessary for the separation. Enough empty space at left/right. Transparent alpha background, NOT a rendered checkerboard. Individual layers will be cropped out of this single coherent exploded view for interactive reassembly."
+      }
+    },
+    {
+      "key": "smile_og_v2",
+      "args": {
+        "referenced_image_paths": [
+          "C:\\Antigravity\\osmilebuguer\\gargalhada.png",
+          "C:\\Antigravity\\osmilebuguer\\logo insta.jpg"
+        ],
+        "prompt": "Use case: compositing. Create one finished 1200x630 landscape Open Graph share graphic for O Smile Burger. Image 1 is the REAL Gargalhada burger photograph: preserve exact burger identity, ingredients and colors, remove only background, large on the right. Image 2 is the ORIGINAL logo: use its exact lettering and proportions, not a redesigned logo. Brand yellow #FFDB00 background with subtle vintage printed paper grain, deep warm brown #2C1812, red #B82014. Sophisticated 1970s groovy Brazilian food poster, strong controlled hierarchy, minimal accents. Large bold rounded Lilita One-like text on the left, exact Portuguese headline: 'TÁ RACHANDO\\nO BICO DE FOME?' in dark brown and red. Small bottom text 'O Smile Burger • Joinville'. Place original supplied logo near top left. Keep all text within safe margins of 50px, fully legible. One subtle four-point star accent, no extra copy, no additional products, no frame, no mockup. Product and headline dominate."
+      }
+    }
+  ],
+  "refinement": "Targeted edit of this exploded burger animation sprite: retain the SAME nine ingredients and photo style, but fix separation and transparency. Remove ALL background color/glow/shadows from the empty areas so those areas have genuine fully transparent alpha. Create at least 35px of COMPLETELY EMPTY transparent gap between each of the nine ingredients. Separate the garlic mayonnaise fully from the bottom bun: they must be two standalone items with a wide transparent gap. Do not let the top bun touch lettuce, cheese touch patty, or any items overlap. Preserve the natural irregular edges of each item, not rectangular strips. Keep all nine centered in a single tall vertical column, same horizontal scale and frontal slightly elevated viewpoint. Make pepper jam a thin spread, not a thick slab, and patty proportional to a 130g artisan burger. No other changes. No words, labels, arrows, scenery or rendered checkerboard. The final sprite must contain exactly nine completely separate opaque food islands on fully transparent background."
+}

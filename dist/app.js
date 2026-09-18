@@ -1,60 +1,270 @@
-const ORDER_URL = 'https://o-smile-burger-1.goomer.app/menu';
-const siteSettings = {name:'O Smile Burger',city:'Joinville – SC',hours:'Segunda a sexta · 19h–23h',socialLinks:{instagram:'https://www.instagram.com/osmileburger/'}};
-const products = [
-{id:'gargalhada',name:'Gargalhada',image:'gargalhada.png',tag:'DOCE, SALGADO & UM SORRISO',ingredients:'Pão brioche, hambúrguer artesanal de 130g, queijo cheddar, bacon, fina fatia de abacaxi tostado com mel e maionese de alho suave.'},
-{id:'salad',name:'Smile Salad',image:'smile salad.png',tag:'FRESQUINHO. CAPRICHADO. SMILE.',ingredients:'Pão brioche, hambúrguer artesanal de 130g, queijo mussarela, alface americana, tomate, cebola, picles e maionese de alho suave.'},
-{id:'bacon',name:'Smile Bacon',image:'smile bacon.png',tag:'CROCÂNCIA QUE FAZ BARULHO',ingredients:'Pão brioche, hambúrguer artesanal de 130g, queijo mussarela, bacon crocante e maionese de alho suave.'},
-{id:'cheese',name:'Cheese Burger',image:'cheese burguer.png',ingredients:'Pão brioche, hambúrguer artesanal de 130g, queijo cheddar e maionese de alho suave.'},
-{id:'calabresa',name:'Smile Calabresa',image:'smile calabresa.png',ingredients:'Pão brioche, hambúrguer artesanal de 130g, queijo mussarela, calabresa, alface americana, tomate, cebola americana e maionese de alho suave.'},
-{id:'melt',name:'Chorriso Melt',image:'chorriso melt.png',ingredients:'Pão brioche, hambúrguer artesanal de 130g, queijo cheddar, cebola caramelizada e maionese de alho suave.'},
-{id:'rachando',name:'Rachando o Bico',image:'rachando o bico.png',ingredients:'Pão brioche, hambúrguer artesanal de 130g, queijo mussarela, geleia de pimenta, alface americana, tomate, cebola roxa e maionese de alho suave.'}
-];
-const combos = [{name:'Rindo sozinho',headline:'SOZINHO?<br>A GENTE RESOLVE.',description:'Seu lanche favorito, uma batata e uma bebida. Monte do seu jeito!',image:'rindo sozinho.png',label:'SEU MOMENTO, SEU SMILE.'},{name:'Sorriso a dois',headline:'A DOIS<br>FICA MELHOR.',description:'Dois hambúrgueres, duas batatas e duas bebidas para dividir bons momentos!',image:'sorriso a dois.png',label:'COMPANHIA BOA. COMBO TAMBÉM.'}];
-// Each layer can receive its own transparent image later. Polygon crops preserve the supplied photograph.
-const burgerLayers = [
-{name:'PÃO BRIOCHE',clip:'polygon(16% 44%,17% 41%,22% 38%,38% 36%,61% 36%,79% 38%,85% 42%,86% 44%)',center:42},
-{name:'CEBOLA ROXA',clip:'polygon(16% 44%,86% 44%,90% 48%,13% 48%)',center:46},
-{name:'ALFACE AMERICANA',clip:'polygon(13% 48%,90% 48%,94% 51%,90% 52%,9% 52%,12% 50%)',center:50},
-{name:'TOMATE',clip:'polygon(9% 52%,90% 52%,91% 56%,12% 56%)',center:54},
-{name:'GELEIA DE PIMENTA',clip:'polygon(12% 56%,91% 56%,93% 60%,11% 60%)',center:58},
-{name:'MUSSARELA',clip:'polygon(11% 60%,93% 60%,94% 64%,11% 64%)',center:62},
-{name:'BURGER 130G',clip:'polygon(11% 64%,94% 64%,94% 67%,11% 67%)',center:65.5},
-{name:'MAIONESE DE ALHO',clip:'polygon(11% 67%,94% 67%,92% 70%,12% 70%)',center:68.5},
-{name:'',clip:'polygon(12% 70%,92% 70%,89% 74%,82% 76%,63% 77%,36% 77%,19% 75%,13% 73%)',center:74}
-];
-const asset = name => `assets/${encodeURIComponent(name)}`;
-const order = (text,place,extra='') => `<a class="button ${extra}" href="${ORDER_URL}" target="_blank" rel="noopener noreferrer" data-order="${place}">${text} <span aria-hidden="true">↗</span></a>`;
-document.querySelector('#sections').innerHTML = `
-<section class="favorites section" id="favoritos"><div class="section-heading reveal"><div><p class="eyebrow">O TIME QUE ARRANCA SORRISOS</p><h2>OS MAIS <span>PEDIDOS.</span></h2></div><p>Tem um Smile com a sua cara.<br>E com a sua fome também.</p></div><div class="favorites-grid">${products.slice(0,3).map((p,i)=>`<article class="product-poster poster-${i} reveal"><div class="poster-top"><span>0${i+1} / FAVORITOS</span><span aria-hidden="true">✳</span></div><h3>${p.name}</h3><div class="poster-image" data-cursor="NHAC"><img src="${asset(p.image)}" alt="${p.name}, fotografia do burger artesanal" width="466" height="700" loading="lazy"><span class="poster-sticker">${i===0?'COM ABACAXI<br>TOSTADO':i===1?'FRESCOR<br>EM CAMADAS':'BACON<br>CROCANTE'}</span></div><p class="product-tag">${p.tag}</p><p class="ingredients">${p.ingredients}</p>${order('QUERO ESSE','product','poster-cta')}</article>`).join('')}</div><p class="swipe-note">DESLIZE PARA CONHECER O TIME →</p></section>
-<section class="inside section" id="por-dentro"><div class="inside-copy reveal"><p class="eyebrow">CADA CAMADA TEM SEU CHARME</p><h2>UM SORRISO<br>EM CADA<br><span>CAMADA.</span></h2><p class="inside-product">RACHANDO O BICO</p><p>Um encontro de frescor, queijo derretido e aquele toque de geleia de pimenta. Por dentro, ele é ainda mais irresistível.</p><p class="hand-note">pode abrir.<br>o segredo é ser bom. ⤴</p>${order('QUERO PROVAR','product')}</div><div class="burger-experience reveal"><div class="experience-heading"><span>POR DENTRO DO SMILE</span><span aria-hidden="true">✳</span></div><button class="burger-stage" id="burger-toggle" aria-expanded="false" aria-label="Abrir as camadas do Rachando o Bico" aria-describedby="burger-instructions"><span class="stage-ring" aria-hidden="true"></span><span class="burger-layers" aria-hidden="true">${burgerLayers.map((l,i)=>`<img class="burger-layer" src="${asset(l.asset||'rachando o bico.png')}" alt="" width="466" height="700" loading="lazy" style="clip-path:${l.clip};--shift:${(i-4)*29}px">`).join('')}</span>${burgerLayers.filter(l=>l.name).map((l,i)=>`<span class="layer-label label-${i%2?'right':'left'}" style="--position:${l.center}%;--shift:${(i-4)*29}px">${l.name}<i aria-hidden="true"></i></span>`).join('')}<span class="tap-hint" aria-hidden="true">TOQUE PARA DESMONTAR <b>+</b></span></button><div class="burger-controls"><p id="burger-instructions">Toque para abrir. Arraste para explorar.</p><label for="layer-range" class="sr-only">Separação das camadas do hambúrguer</label><div class="range-row"><span>JUNTO</span><input id="layer-range" type="range" min="0" max="100" value="0"><span>POR DENTRO</span></div></div></div></section>
-<section class="more section"><div class="section-heading reveal"><div><p class="eyebrow">A FOME É SUA. A ESCOLHA TAMBÉM.</p><h2>MAIS MOTIVOS<br>PRA <span>SORRIR.</span></h2></div><a class="text-link" href="${ORDER_URL}" target="_blank" rel="noopener noreferrer" data-order="product">CARDÁPIO COMPLETO ↗</a></div><div class="more-grid">${products.slice(3).map((p,i)=>`<article class="mini-product reveal"><div class="mini-photo" data-cursor="NHAC"><img src="${asset(p.image)}" width="466" height="700" loading="lazy" alt="${p.name}"><span>0${i+4}</span></div><h3>${p.name}</h3><p>${p.ingredients}</p><a class="text-link" href="${ORDER_URL}" target="_blank" rel="noopener noreferrer" data-order="product">QUERO ESSE ↗</a></article>`).join('')}</div></section>
-<section class="brand-moment" aria-labelledby="brand-headline"><img src="${asset('smile bacon.png')}" alt="Smile Bacon com bacon crocante, queijo e maionese de alho" width="466" height="700" loading="lazy"><div class="brand-overlay"></div><div class="brand-content reveal"><span>SEM ECONOMIZAR NO SORRISO.</span><h2 id="brand-headline">UM SORRISO<br>A CADA<br><em>MORDIDA.</em></h2><span class="brand-stamp">KEEP<br>SMILING :)</span></div></section>
-<section class="combos section" id="combos"><div class="section-heading reveal"><div><p class="eyebrow">BURGER + BATATA + BEBIDA</p><h2>COMBO DE<br><span>FELICIDADE.</span></h2></div><span class="combo-doodle" aria-hidden="true">JUNTOS<br>É MAIS GOSTOSO! ✳</span></div>${combos.map((c,i)=>`<article class="combo combo-${i} reveal"><div class="combo-image" data-cursor="NHAC"><img src="${asset(c.image)}" alt="Combo ${c.name}: hambúrguer${i?'es':''}, batata${i?'s':''} e bebida${i?'s':''}" width="466" height="700" loading="lazy"><span class="combo-number">0${i+1}</span></div><div class="combo-copy"><p class="eyebrow">${c.label}</p><h3>${c.headline}</h3><p class="combo-name">${c.name}</p><p>${c.description}</p>${order('BORA DE COMBO','combo')}</div></article>`).join('')}<div class="fries-note"><span aria-hidden="true">✳</span><p><b>NÃO ESQUECE A BATATA!</b> Uma porção de 150g pra completar o sorriso.</p><a class="text-link" href="${ORDER_URL}" target="_blank" rel="noopener noreferrer" data-order="combo">EU QUERO ↗</a></div></section>
-<section class="how section"><p class="eyebrow reveal">DA VONTADE À PRIMEIRA MORDIDA</p><h2 class="reveal">É FÁCIL ASSIM.</h2><div class="steps">${[['ESCOLHE','Encontra o Smile da vez.'],['PEDE','Fecha seu pedido no Goomer.'],['CHEGOU','Recebe e abre a felicidade.'],['SORRI','O resto é com a primeira mordida.']].map((s,i)=>`<div class="step reveal"><span class="step-number">0${i+1}</span><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join('')}</div>${order('COMEÇAR PELO SORRISO','hero')}</section>
-<section class="social section"><div class="social-copy reveal"><p class="eyebrow">SEU FEED TAMBÉM MERECE</p><h2>SEGUE<br>O <span>SMILE.</span></h2><p>Um pouquinho de fome<br>entre um scroll e outro.</p><a class="button" href="${siteSettings.socialLinks.instagram}" target="_blank" rel="noopener noreferrer">SEGUIR @OSMILEBURGER <span aria-hidden="true">↗</span></a></div><div class="social-photos reveal"><figure><img src="${asset('gargalhada.png')}" alt="Gargalhada com abacaxi tostado" width="466" height="700" loading="lazy"><figcaption>um caso sério com burger.</figcaption></figure><figure><img src="${asset('smile salad.png')}" alt="Camadas de frescor do Smile Salad" width="466" height="700" loading="lazy"><figcaption>@osmileburger</figcaption></figure><span class="social-star" aria-hidden="true">✳</span></div></section>
-<section class="final-cta section"><p class="eyebrow reveal">A GENTE SABE QUE DEU VONTADE.</p><h2 class="reveal">BORA<br><span>RACHAR O BICO?</span></h2>${order('PEDIR AGORA','footer','giant-button')}<p>JOINVILLE • SEGUNDA A SEXTA • 19H–23H</p></section>
-<footer><div class="footer-top"><a class="logo" href="#inicio" aria-label="O Smile Burger, voltar ao início"><img src="${asset('logo insta.jpg')}" alt="O Smile Burger" width="1000" height="1000"></a><div><b>FEITO EM JOINVILLE.</b><span>Joinville – SC</span></div><div><b>HORA DO SMILE</b><span>Segunda a sexta<br>19h – 23h</span></div><div><a href="${siteSettings.socialLinks.instagram}" target="_blank" rel="noopener noreferrer">INSTAGRAM ↗</a><a href="${ORDER_URL}" data-order="footer" target="_blank" rel="noopener noreferrer">CARDÁPIO / PEDIDOS ↗</a></div></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} O Smile Burger</span><b>KEEP SMILING :)</b><a href="#inicio">LÁ PRA CIMA ↑</a></div></footer>`;
+/* O Smile V2 — progressive enhancement; all content and order links are static HTML. */
+(() => {
+  'use strict';
+  const $ = selector => document.querySelector(selector);
+  const $$ = selector => [...document.querySelectorAll(selector)];
+  const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
+  const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = matchMedia('(pointer: fine)');
+  let reducedMotion = motionPreference.matches;
 
-function bindOrderLinks(){document.querySelectorAll('[data-order]').forEach(a=>{a.href=ORDER_URL;a.target='_blank';a.rel='noopener noreferrer';a.addEventListener('click',()=>{const detail={event:`click_order_${a.dataset.order}`,product:a.closest('article')?.querySelector('h3')?.textContent||null};window.dispatchEvent(new CustomEvent('smile:analytics',{detail}));if(Array.isArray(window.dataLayer))window.dataLayer.push(detail);});});}
-bindOrderLinks();
-const media=matchMedia('(prefers-reduced-motion: reduce)');
-let reduceMotion=media.matches;
-media.addEventListener('change',event=>{reduceMotion=event.matches;if(reduceMotion){document.querySelectorAll('.reveal').forEach(el=>el.classList.add('shown'));document.querySelectorAll('.hero-photo,.poster-image,.brand-moment>img').forEach(el=>el.style.removeProperty('transform'));document.querySelector('.cursor-tag').style.display='none';}});
-const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('shown');revealObserver.unobserve(e.target)}}),{threshold:.08});
-if(!reduceMotion){document.documentElement.classList.add('motion-ready');document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.setProperty('--delay',`${i%3*70}ms`);revealObserver.observe(el)})}
-const header=document.querySelector('header'),sticky=document.querySelector('.sticky-order'),menuButton=document.querySelector('.menu-toggle'),mobileNav=document.querySelector('#mobile-nav');
-function toggleMenu(open){mobileNav.hidden=!open;menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');menuButton.textContent=open?'×':'☰';}
-menuButton.addEventListener('click',()=>toggleMenu(mobileNav.hidden));mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggleMenu(false)));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!mobileNav.hidden){toggleMenu(false);menuButton.focus()}});
-const burgerStage=document.querySelector('.burger-stage'),range=document.querySelector('#layer-range');let pinned=false;
-function openLayers(value,commit=false){const progress=Math.max(0,Math.min(100,Number(value)));burgerStage.style.setProperty('--open',progress/100);burgerStage.classList.toggle('opened',progress>20);burgerStage.setAttribute('aria-expanded',String(progress>20));burgerStage.setAttribute('aria-label',progress>20?'Fechar as camadas do Rachando o Bico':'Abrir as camadas do Rachando o Bico');burgerStage.querySelector('.tap-hint').innerHTML=progress>20?'TOQUE PARA MONTAR <b>−</b>':'TOQUE PARA DESMONTAR <b>+</b>';if(commit)range.value=progress;}
-burgerStage.addEventListener('click',()=>{pinned=!pinned;openLayers(pinned?100:0,true)});
-burgerStage.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse'&&!pinned&&Number(range.value)===0)openLayers(55)});
-burgerStage.addEventListener('pointerleave',()=>{openLayers(range.value);burgerStage.style.setProperty('--mouse-x','0px')});
-burgerStage.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||reduceMotion)return;const rect=burgerStage.getBoundingClientRect();burgerStage.style.setProperty('--mouse-x',`${((e.clientX-rect.left)/rect.width-.5)*12}px`)});
-range.addEventListener('input',()=>{pinned=Number(range.value)>0;openLayers(range.value)});
-let scrollPending=false;const brand=document.querySelector('.brand-moment');
-function onScroll(){header.classList.toggle('scrolled',scrollY>150);sticky.classList.toggle('visible',scrollY>500);if(!reduceMotion){const r=brand.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)brand.querySelector('img').style.transform=`scale(1.1) translateY(${(r.top/innerHeight)*35}px)`;}scrollPending=false;}
-window.addEventListener('scroll',()=>{if(!scrollPending){scrollPending=true;requestAnimationFrame(onScroll)}},{passive:true});onScroll();
-const fine=matchMedia('(pointer:fine)');
-if(fine.matches){const hero=document.querySelector('.hero-art'),photo=hero.querySelector('.hero-photo');hero.addEventListener('pointermove',e=>{if(reduceMotion)return;const r=hero.getBoundingClientRect();photo.style.transform=`rotate(${8+(e.clientX-r.left-r.width/2)/80}deg) translateY(${(e.clientY-r.top-r.height/2)/45}px)`});hero.addEventListener('pointerleave',()=>photo.style.removeProperty('transform'));document.querySelectorAll('.poster-image').forEach(el=>{el.addEventListener('pointermove',e=>{if(reduceMotion)return;const r=el.getBoundingClientRect();el.style.transform=`perspective(800px) rotateY(${(e.clientX-r.left-r.width/2)/50}deg) rotateX(${-(e.clientY-r.top-r.height/2)/60}deg)`});el.addEventListener('pointerleave',()=>el.style.removeProperty('transform'))});const cursor=document.querySelector('.cursor-tag');document.querySelectorAll('[data-cursor],.button').forEach(el=>{el.addEventListener('pointerenter',()=>{if(reduceMotion)return;cursor.textContent=el.dataset.cursor||'PEDIR';cursor.style.display='grid'});el.addEventListener('pointermove',e=>{cursor.style.left=`${e.clientX+17}px`;cursor.style.top=`${e.clientY+17}px`});el.addEventListener('pointerleave',()=>cursor.style.display='none')});}
+  function track(event, properties = {}) {
+    const detail = { event, ...properties };
+    window.dispatchEvent(new CustomEvent('smile:analytics', { detail }));
+    if (Array.isArray(window.dataLayer)) window.dataLayer.push(detail);
+  }
 
+  function bindAnalytics() {
+    $$('[data-order]').forEach(link => link.addEventListener('click', () => {
+      track(`click_order_${link.dataset.order}`, {
+        product: link.dataset.product || link.closest('[data-product]')?.dataset.product || null
+      });
+    }));
+    $$('[data-instagram]').forEach(link => link.addEventListener('click', () => track('click_instagram')));
+  }
+
+  function initMenu() {
+    const button = $('.menu-toggle');
+    const nav = $('#mobile-nav');
+    function setOpen(open, restoreFocus = false) {
+      nav.hidden = !open;
+      button.setAttribute('aria-expanded', String(open));
+      button.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+      if (open) track('open_mobile_menu');
+      if (restoreFocus) button.focus();
+    }
+    button.addEventListener('click', () => setOpen(nav.hidden));
+    nav.addEventListener('click', event => { if (event.target.closest('a')) setOpen(false); });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !nav.hidden) setOpen(false, true);
+    });
+    document.addEventListener('pointerdown', event => {
+      if (!nav.hidden && !nav.contains(event.target) && !button.contains(event.target)) setOpen(false);
+    });
+    matchMedia('(max-width:700px)').addEventListener('change', event => {
+      if (!event.matches) setOpen(false);
+    });
+  }
+
+  function initReveals() {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        if (!reducedMotion) entry.target.classList.add('is-revealing');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: .12 });
+    $$('.reveal').forEach(element => observer.observe(element));
+  }
+
+  function initBurger() {
+    const scene = $('#burger-scene');
+    const stage = $('#burger-toggle');
+    const range = $('#layer-range');
+    const counter = $('.experience-counter');
+    let value = 0, target = 0, velocity = 0, frame = 0, lastTime = 0;
+    let pinned = false, manual = false, hovered = false, gesture = null, swallowClick = false;
+    let lastAnnounced = false;
+
+    function render() {
+      const progress = clamp(value);
+      scene.style.setProperty('--open', progress.toFixed(4));
+      scene.style.setProperty('--label-opacity', clamp((progress - .24) / .32).toFixed(3));
+      counter.textContent = `${Math.round(progress * 100).toString().padStart(2, '0')} / 100`;
+      const expanded = progress > .2;
+      if (expanded !== lastAnnounced) {
+        stage.setAttribute('aria-expanded', String(expanded));
+        stage.setAttribute('aria-label', expanded ? 'Fechar as camadas do Rachando o Bico' : 'Abrir as camadas do Rachando o Bico');
+        lastAnnounced = expanded;
+      }
+      if (document.activeElement !== range) range.value = Math.round(progress * 100);
+      range.setAttribute('aria-valuetext', progress < .01 ? 'Burger montado' : `${Math.round(progress * 100)}% aberto`);
+    }
+
+    function tick(time) {
+      const dt = Math.min((time - (lastTime || time - 16)) / 1000, .032);
+      lastTime = time;
+      velocity += ((target - value) * 190 - velocity * 25) * dt;
+      value = clamp(value + velocity * dt);
+      render();
+      if (Math.abs(target - value) > .0008 || Math.abs(velocity) > .008) frame = requestAnimationFrame(tick);
+      else { value = target; velocity = 0; frame = 0; lastTime = 0; render(); }
+    }
+
+    function setTarget(next, immediate = false) {
+      target = clamp(next);
+      if (reducedMotion || immediate) {
+        cancelAnimationFrame(frame); frame = 0; lastTime = 0; velocity = 0; value = target; render();
+      } else if (!frame) frame = requestAnimationFrame(tick);
+    }
+
+    function report(method) {
+      track('interaction_burger_exploded', { method, progress: Math.round(target * 100), product: 'rachando' });
+    }
+
+    stage.addEventListener('pointerenter', event => {
+      if (event.pointerType !== 'mouse' || !finePointer.matches || reducedMotion) return;
+      hovered = true;
+      if (!pinned && !gesture) setTarget(.25);
+    });
+    stage.addEventListener('pointermove', event => {
+      if (gesture?.id === event.pointerId) {
+        const dy = gesture.y - event.clientY;
+        if (Math.abs(dy) > 6) gesture.moved = true;
+        if (gesture.moved) {
+          manual = true;
+          const travel = Math.max(170, Math.min(260, scene.clientHeight * .43));
+          setTarget(gesture.start + dy / travel, true);
+          event.preventDefault();
+        }
+        return;
+      }
+      if (event.pointerType !== 'mouse' || reducedMotion || !finePointer.matches) return;
+      const rect = stage.getBoundingClientRect();
+      const x = clamp((event.clientX - rect.left) / rect.width);
+      const y = clamp((event.clientY - rect.top) / rect.height);
+      scene.style.setProperty('--mouse-x', ((x - .5) * 1.5).toFixed(3));
+      if (!pinned) setTarget(.25 + clamp(.8 - y) * .7);
+    });
+    stage.addEventListener('pointerleave', () => {
+      hovered = false;
+      scene.style.setProperty('--mouse-x', '0');
+      if (!gesture && !pinned) setTarget(0);
+    });
+    stage.addEventListener('pointerdown', event => {
+      if (!event.isPrimary || event.button !== 0) return;
+      swallowClick = false;
+      gesture = { id: event.pointerId, y: event.clientY, start: value, moved: false };
+      stage.setPointerCapture(event.pointerId);
+    });
+    function finishGesture(event, cancelled = false) {
+      if (!gesture || gesture.id !== event.pointerId) return;
+      const completed = gesture;
+      gesture = null;
+      if (stage.hasPointerCapture(event.pointerId)) stage.releasePointerCapture(event.pointerId);
+      if (completed.moved && !cancelled) {
+        swallowClick = true;
+        pinned = value >= .45;
+        setTarget(pinned ? 1 : 0);
+        report('drag');
+      } else if (cancelled) setTarget(completed.start);
+    }
+    stage.addEventListener('pointerup', event => finishGesture(event));
+    stage.addEventListener('pointercancel', event => finishGesture(event, true));
+    stage.addEventListener('click', event => {
+      if (swallowClick && event.detail !== 0) { swallowClick = false; return; }
+      manual = true;
+      pinned = !pinned;
+      setTarget(pinned ? 1 : 0);
+      report(event.detail === 0 ? 'keyboard' : 'click');
+    });
+    stage.addEventListener('keydown', event => {
+      if (!['ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault(); manual = true;
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? 1 : target + (event.key === 'ArrowUp' ? .1 : -.1);
+      setTarget(next); pinned = target > 0; report('keyboard');
+    });
+    range.addEventListener('input', () => {
+      manual = true; pinned = Number(range.value) > 0; setTarget(Number(range.value) / 100);
+    });
+    range.addEventListener('change', () => report('range'));
+    new ResizeObserver(() => {
+      const unit = clamp(scene.clientWidth / 630, .7, 1.08);
+      scene.style.setProperty('--unit', unit.toFixed(3));
+    }).observe(scene);
+    render();
+    return {
+      story(progress) {
+        if (!manual && !hovered && !gesture && !reducedMotion && innerWidth > 800) setTarget(progress * .14);
+      },
+      motionChanged() { setTarget(target, true); scene.style.setProperty('--mouse-x', '0'); }
+    };
+  }
+
+  function initScroll(burger) {
+    const header = $('#header'), sticky = $('.sticky-order');
+    const hero = $('.hero'), inside = $('.inside'), brand = $('.brand-moment'), ending = $('.final-cta');
+    let pending = false;
+    function update() {
+      pending = false;
+      const heroRect = hero.getBoundingClientRect();
+      const insideRect = inside.getBoundingClientRect();
+      const brandRect = brand.getBoundingClientRect();
+      const endingRect = ending.getBoundingClientRect();
+      const fixed = scrollY > 145;
+      header.classList.toggle('scrolled', fixed);
+      document.body.classList.toggle('header-fixed', fixed);
+      sticky.classList.toggle('visible', heroRect.bottom < innerHeight * .45 && endingRect.top > innerHeight * .8);
+      if (reducedMotion) return;
+      if (heroRect.bottom > 0) hero.style.setProperty('--hero-progress', clamp(-heroRect.top / heroRect.height).toFixed(3));
+      if (brandRect.top < innerHeight && brandRect.bottom > 0) brand.style.setProperty('--brand-progress', clamp((innerHeight - brandRect.top) / (innerHeight + brandRect.height)).toFixed(3));
+      if (insideRect.top < innerHeight && insideRect.bottom > 0) burger.story(clamp(-insideRect.top / Math.max(300, insideRect.height - innerHeight)));
+    }
+    function schedule() { if (!pending) { pending = true; requestAnimationFrame(update); } }
+    addEventListener('scroll', schedule, { passive: true });
+    addEventListener('resize', schedule, { passive: true });
+    update();
+    return update;
+  }
+
+  function initPointerDepth() {
+    $$('[data-depth]').forEach(element => {
+      let frame = 0, x = 0, y = 0;
+      element.addEventListener('pointermove', event => {
+        if (reducedMotion || event.pointerType !== 'mouse' || !finePointer.matches) return;
+        const rect = element.getBoundingClientRect();
+        x = ((event.clientX - rect.left) / rect.width - .5) * 2;
+        y = ((event.clientY - rect.top) / rect.height - .5) * 2;
+        if (!frame) frame = requestAnimationFrame(() => {
+          element.style.setProperty('--depth-x', x.toFixed(3));
+          element.style.setProperty('--depth-y', y.toFixed(3)); frame = 0;
+        });
+      });
+      element.addEventListener('pointerleave', () => {
+        cancelAnimationFrame(frame); frame = 0;
+        element.style.setProperty('--depth-x', '0'); element.style.setProperty('--depth-y', '0');
+      });
+    });
+  }
+
+  function initCursor() {
+    const cursor = $('.cursor-tag');
+    let active = false, frame = 0, x = 0, y = 0, tx = 0, ty = 0;
+    function draw() {
+      x += (tx - x) * .2; y += (ty - y) * .2;
+      cursor.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`;
+      if (active && (Math.abs(tx - x) > .2 || Math.abs(ty - y) > .2)) frame = requestAnimationFrame(draw);
+      else frame = 0;
+    }
+    function hide() { active = false; cursor.style.opacity = '0'; cancelAnimationFrame(frame); frame = 0; }
+    $$('[data-cursor],.button:not(.sticky-order)').forEach(element => {
+      element.addEventListener('pointerenter', event => {
+        if (reducedMotion || event.pointerType !== 'mouse' || !finePointer.matches) return;
+        active = true; cursor.textContent = element.dataset.cursor || 'PEDIR';
+        x = tx = event.clientX + 18; y = ty = event.clientY + 18;
+        cursor.style.opacity = '1'; if (!frame) frame = requestAnimationFrame(draw);
+      });
+      element.addEventListener('pointermove', event => {
+        if (!active) return; tx = event.clientX + 18; ty = event.clientY + 18;
+        if (!frame) frame = requestAnimationFrame(draw);
+      });
+      element.addEventListener('pointerleave', hide);
+    });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) hide(); });
+    return hide;
+  }
+
+  bindAnalytics(); initMenu(); initReveals(); initPointerDepth();
+  const burger = initBurger();
+  const updateScroll = initScroll(burger);
+  const hideCursor = initCursor();
+  motionPreference.addEventListener('change', event => {
+    reducedMotion = event.matches;
+    hideCursor(); burger.motionChanged();
+    $$('[data-depth]').forEach(element => {
+      element.style.setProperty('--depth-x', '0'); element.style.setProperty('--depth-y', '0');
+    });
+    if (reducedMotion) $$('.is-revealing').forEach(element => element.classList.remove('is-revealing'));
+    updateScroll();
+  });
+})();

@@ -1,0 +1,92 @@
+{
+  "bun-top": {
+    "width": 800,
+    "height": 228,
+    "sourceBox": [
+      148,
+      17,
+      856,
+      237
+    ]
+  },
+  "lettuce": {
+    "width": 800,
+    "height": 206,
+    "sourceBox": [
+      130,
+      237,
+      895,
+      435
+    ]
+  },
+  "onion": {
+    "width": 800,
+    "height": 160,
+    "sourceBox": [
+      190,
+      430,
+      853,
+      582
+    ]
+  },
+  "tomato": {
+    "width": 800,
+    "height": 157,
+    "sourceBox": [
+      165,
+      570,
+      849,
+      719
+    ]
+  },
+  "pepper-jam": {
+    "width": 800,
+    "height": 112,
+    "sourceBox": [
+      137,
+      729,
+      884,
+      833
+    ]
+  },
+  "mozzarella": {
+    "width": 800,
+    "height": 153,
+    "sourceBox": [
+      151,
+      849,
+      864,
+      994
+    ]
+  },
+  "patty": {
+    "width": 800,
+    "height": 154,
+    "sourceBox": [
+      157,
+      985,
+      854,
+      1170
+    ]
+  },
+  "garlic-mayo": {
+    "width": 800,
+    "height": 94,
+    "sourceBox": [
+      185,
+      1197,
+      833,
+      1283
+    ]
+  },
+  "bun-bottom": {
+    "width": 800,
+    "height": 242,
+    "sourceBox": [
+      151,
+      1283,
+      867,
+      1517
+    ]
+  }
+}

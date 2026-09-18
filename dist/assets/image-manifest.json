@@ -1,0 +1,170 @@
+{
+  "gargalhada": {
+    "width": 466,
+    "height": 700,
+    "sourceBytes": 261206,
+    "variants": [
+      {
+        "file": "assets/photos/gargalhada-320.webp",
+        "width": 320,
+        "bytes": 12422
+      },
+      {
+        "file": "assets/photos/gargalhada-466.webp",
+        "width": 466,
+        "bytes": 21016
+      }
+    ]
+  },
+  "smile-salad": {
+    "width": 466,
+    "height": 700,
+    "sourceBytes": 321877,
+    "variants": [
+      {
+        "file": "assets/photos/smile-salad-320.webp",
+        "width": 320,
+        "bytes": 15348
+      },
+      {
+        "file": "assets/photos/smile-salad-466.webp",
+        "width": 466,
+        "bytes": 25904
+      }
+    ]
+  },
+  "smile-bacon": {
+    "width": 1050,
+    "height": 700,
+    "sourceBytes": 996956,
+    "variants": [
+      {
+        "file": "assets/photos/smile-bacon-320.webp",
+        "width": 320,
+        "bytes": 13572
+      },
+      {
+        "file": "assets/photos/smile-bacon-640.webp",
+        "width": 640,
+        "bytes": 38182
+      },
+      {
+        "file": "assets/photos/smile-bacon-1050.webp",
+        "width": 1050,
+        "bytes": 79734
+      }
+    ]
+  },
+  "cheese-burger": {
+    "width": 466,
+    "height": 700,
+    "sourceBytes": 295885,
+    "variants": [
+      {
+        "file": "assets/photos/cheese-burger-320.webp",
+        "width": 320,
+        "bytes": 14908
+      },
+      {
+        "file": "assets/photos/cheese-burger-466.webp",
+        "width": 466,
+        "bytes": 25510
+      }
+    ]
+  },
+  "smile-calabresa": {
+    "width": 466,
+    "height": 700,
+    "sourceBytes": 265023,
+    "variants": [
+      {
+        "file": "assets/photos/smile-calabresa-320.webp",
+        "width": 320,
+        "bytes": 14868
+      },
+      {
+        "file": "assets/photos/smile-calabresa-466.webp",
+        "width": 466,
+        "bytes": 25386
+      }
+    ]
+  },
+  "chorriso-melt": {
+    "width": 583,
+    "height": 433,
+    "sourceBytes": 357005,
+    "variants": [
+      {
+        "file": "assets/photos/chorriso-melt-320.webp",
+        "width": 320,
+        "bytes": 12090
+      },
+      {
+        "file": "assets/photos/chorriso-melt-583.webp",
+        "width": 583,
+        "bytes": 25830
+      }
+    ]
+  },
+  "rachando-o-bico": {
+    "width": 466,
+    "height": 700,
+    "sourceBytes": 389649,
+    "variants": [
+      {
+        "file": "assets/photos/rachando-o-bico-320.webp",
+        "width": 320,
+        "bytes": 19110
+      },
+      {
+        "file": "assets/photos/rachando-o-bico-466.webp",
+        "width": 466,
+        "bytes": 33068
+      }
+    ]
+  },
+  "rindo-sozinho": {
+    "width": 466,
+    "height": 700,
+    "sourceBytes": 365236,
+    "variants": [
+      {
+        "file": "assets/photos/rindo-sozinho-320.webp",
+        "width": 320,
+        "bytes": 17636
+      },
+      {
+        "file": "assets/photos/rindo-sozinho-466.webp",
+        "width": 466,
+        "bytes": 29054
+      }
+    ]
+  },
+  "sorriso-a-dois": {
+    "width": 466,
+    "height": 700,
+    "sourceBytes": 410175,
+    "variants": [
+      {
+        "file": "assets/photos/sorriso-a-dois-320.webp",
+        "width": 320,
+        "bytes": 25856
+      },
+      {
+        "file": "assets/photos/sorriso-a-dois-466.webp",
+        "width": 466,
+        "bytes": 45122
+      }
+    ]
+  },
+  "logo": {
+    "width": 446,
+    "height": 197,
+    "crop": [
+      294,
+      406,
+      740,
+      603
+    ]
+  }
+}
