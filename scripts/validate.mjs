@@ -19,6 +19,8 @@ for(const match of html.matchAll(/<a\b[^>]*data-order="[^>]*>/g)){
 for(const match of html.matchAll(/href="#([^"]+)"/g)) assert(html.includes(`id="${match[1]}"`));
 for(const item of [...products,...combos]) assert(html.includes(item.name));
 for(const layer of burgerLayers) assert(html.includes(`data-layer="${layer.id}"`));
+assert.equal((html.match(/class="layer-label\b/g)||[]).length, 9, 'All 9 layers have labels');
+for(const layer of burgerLayers) assert(html.includes(layer.name), `Label for ${layer.id} is rendered`);
 assert(html.includes(`rel="canonical" href="${SITE_URL}"`));
 assert(html.includes('og:image:width" content="1200"'));
 const schema=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
@@ -52,12 +54,21 @@ function harness(reducedMotion){
   function settle(){let n=0;while(queue.size&&n++<400){time+=16;const frames=[...queue.values()];queue.clear();frames.forEach(f=>f(time));}assert(n<400,'Spring settles');}
   function fire(type,data={}){stage.listeners[type]({isPrimary:true,button:0,pointerId:1,pointerType:'touch',clientY:350,detail:1,preventDefault(){},...data});settle();}
   const progress=()=>Number(scene.style['--open']);
+  if(!reducedMotion){
+    fire('pointerenter',{pointerType:'mouse'});assert.equal(progress(),.28,'Hover opens partially');
+    fire('pointermove',{pointerType:'mouse',clientX:100,clientY:200});
+    assert.equal(scene.style['--mouse-x'],'-0.350');
+    assert.equal(scene.style['--mouse-y'],'-0.228');
+    assert.equal(progress(),.28,'Mouse move preserves hover target without jitter');
+    fire('pointerleave');assert.equal(progress(),0,'Leaving hover resets to 0');
+  }
   fire('click');assert.equal(progress(),1);fire('click');assert.equal(progress(),0);
   for(const pointerType of ['touch','mouse']){
     fire('pointerdown',{pointerType,clientY:450});fire('pointermove',{pointerType,clientY:180});fire('pointerup',{pointerType,clientY:180});
     fire('click');assert.equal(progress(),1,`${pointerType} upward drag pins open and consumes click`);
-    fire('pointerdown',{pointerType,clientY:180});fire('pointermove',{pointerType,clientY:470});fire('pointerup',{pointerType,clientY:470});
-    fire('click');assert.equal(progress(),0,`${pointerType} downward drag closes`);
+    // Test directional drag down from open:
+    fire('pointerdown',{pointerType,clientY:180});fire('pointermove',{pointerType,clientY:240});fire('pointerup',{pointerType,clientY:240});
+    fire('click');assert.equal(progress(),0,`${pointerType} directional downward drag closes`);
   }
   fire('keydown',{key:'End'});assert.equal(progress(),1);fire('keydown',{key:'Home'});assert.equal(progress(),0);
   fire('keydown',{key:'ArrowUp'});assert.equal(progress(),.1);

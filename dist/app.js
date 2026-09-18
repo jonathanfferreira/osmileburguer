@@ -105,7 +105,7 @@
     stage.addEventListener('pointerenter', event => {
       if (event.pointerType !== 'mouse' || !finePointer.matches || reducedMotion) return;
       hovered = true;
-      if (!pinned && !gesture) setTarget(.25);
+      if (!pinned && !gesture) setTarget(.28);
     });
     stage.addEventListener('pointermove', event => {
       if (gesture?.id === event.pointerId) {
@@ -124,11 +124,12 @@
       const x = clamp((event.clientX - rect.left) / rect.width);
       const y = clamp((event.clientY - rect.top) / rect.height);
       scene.style.setProperty('--mouse-x', ((x - .5) * 1.5).toFixed(3));
-      if (!pinned) setTarget(.25 + clamp(.8 - y) * .7);
+      scene.style.setProperty('--mouse-y', ((y - .5) * 1.5).toFixed(3));
     });
     stage.addEventListener('pointerleave', () => {
       hovered = false;
       scene.style.setProperty('--mouse-x', '0');
+      scene.style.setProperty('--mouse-y', '0');
       if (!gesture && !pinned) setTarget(0);
     });
     stage.addEventListener('pointerdown', event => {
@@ -144,7 +145,10 @@
       if (stage.hasPointerCapture(event.pointerId)) stage.releasePointerCapture(event.pointerId);
       if (completed.moved && !cancelled) {
         swallowClick = true;
-        pinned = value >= .45;
+        const dy = completed.y - event.clientY;
+        if (dy > 25) pinned = true;
+        else if (dy < -25) pinned = false;
+        else pinned = value >= .45;
         setTarget(pinned ? 1 : 0);
         report('drag');
       } else if (cancelled) setTarget(completed.start);
@@ -177,7 +181,7 @@
       story(progress) {
         if (!manual && !hovered && !gesture && !reducedMotion && innerWidth > 800) setTarget(progress * .14);
       },
-      motionChanged() { setTarget(target, true); scene.style.setProperty('--mouse-x', '0'); }
+      motionChanged() { setTarget(target, true); scene.style.setProperty('--mouse-x', '0'); scene.style.setProperty('--mouse-y', '0'); }
     };
   }
 
