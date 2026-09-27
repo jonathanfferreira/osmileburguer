@@ -24,30 +24,30 @@ const logo=(footer=false)=>`<a class="logo" href="#inicio" aria-label="O Smile B
 const heading=(content)=>`<span class="heading-mask"><span>${content}</span></span>`;
 const marqueeText=`BURGER <span>${icon('sparkle')}</span> SMILE <span>${icon('sparkle')}</span> FRIES <span>${icon('sparkle')}</span> DELIVERY <span>${icon('sparkle')}</span> `;
 export function renderSite(){
-const schema={'@context':'https://schema.org','@type':'Restaurant','@id':`${SITE_URL}#restaurant`,name:siteSettings.name,url:SITE_URL,image:`${SITE_URL}assets/og-smile.jpg`,logo:`${SITE_URL}assets/brand/logo.png`,address:{'@type':'PostalAddress',addressLocality:'Joinville',addressRegion:'SC',addressCountry:'BR'},servesCuisine:'Hambúrgueres artesanais',hasMenu:ORDER_URL,sameAs:[siteSettings.socialLinks.instagram],openingHoursSpecification:[{'@type':'OpeningHoursSpecification',dayOfWeek:['Monday','Tuesday','Wednesday','Thursday','Friday'],opens:'19:00',closes:'23:00'}]};
+const schema={'@context':'https://schema.org','@type':'Restaurant','@id':`${SITE_URL}#restaurant`,name:siteSettings.name,url:SITE_URL,image:`${SITE_URL}assets/og-smile.jpg`,logo:`${SITE_URL}assets/brand/logo.png`,slogan:'A felicidade em forma de hambúrguer',description:'Hambúrgueres artesanais e delivery em Joinville – SC. Pão brioche, burger 130g e combinações como Gargalhada e Smile Bacon. Peça de segunda a sexta, das 19h às 23h.',address:{'@type':'PostalAddress',addressLocality:'Joinville',addressRegion:'SC',addressCountry:'BR'},servesCuisine:['Hambúrgueres artesanais','Lanches','Fast food'],priceRange:'$$',areaServed:{'@type':'City','name':'Joinville'},hasMenu:ORDER_URL,sameAs:[siteSettings.socialLinks.instagram],openingHoursSpecification:[{'@type':'OpeningHoursSpecification',dayOfWeek:['Monday','Tuesday','Wednesday','Thursday','Friday'],opens:'19:00',closes:'23:00'}],potentialAction:{'@type':'OrderAction',name:'Pedir delivery',target:ORDER_URL,deliveryMethod:'http://purl.org/goodrelations/v1#DeliveryModeOwnFleet'}};
 return `<!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffdb00">
-  <title>O Smile Burger — Um sorriso a cada mordida</title>
-  <meta name="description" content="Burgers artesanais, combos e bons motivos pra sorrir. O Smile Burger em Joinville. Peça pelo Goomer, de segunda a sexta, das 19h às 23h.">
+  <title>Hambúrguer Artesanal em Joinville • Delivery | O Smile Burger</title>
+  <meta name="description" content="Hambúrguer artesanal em Joinville com delivery pelo Goomer: Gargalhada, Smile Bacon, combos e batatas. Peça de segunda a sexta, das 19h às 23h. Mordeu, sorriu!">
   <link rel="canonical" href="${SITE_URL}">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="O Smile Burger">
-  <meta property="og:title" content="Tá rachando o bico de fome? Então pede um Smile.">
-  <meta property="og:description" content="Burgers artesanais em Joinville. Um sorriso a cada mordida. Delivery de segunda a sexta, 19h–23h.">
+  <meta property="og:title" content="A felicidade em forma de hambúrguer — O Smile Burger">
+  <meta property="og:description" content="Hambúrguer artesanal e delivery em Joinville. Mordeu, sorriu! Peça de segunda a sexta, das 19h às 23h.">
   <meta property="og:url" content="${SITE_URL}">
   <meta property="og:image" content="${SITE_URL}assets/og-smile.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="O Smile Burger: tá rachando o bico de fome? Burger Gargalhada e identidade original da marca.">
+  <meta property="og:image:alt" content="O Smile Burger: a felicidade em forma de hambúrguer. Burger Gargalhada e identidade original da marca.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="O Smile Burger — Tá rachando o bico de fome?">
-  <meta name="twitter:description" content="Burgers artesanais, combos e sorrisos. Joinville – SC.">
+  <meta name="twitter:title" content="O Smile Burger — A felicidade em forma de hambúrguer">
+  <meta name="twitter:description" content="Hambúrguer artesanal e delivery em Joinville – SC. Mordeu, sorriu!">
   <meta name="twitter:image" content="${SITE_URL}assets/og-smile.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/apple-touch-icon.png">
@@ -71,14 +71,14 @@ return `<!doctype html>
 <section class="hero" id="inicio" aria-labelledby="hero-title">
   <div class="hero-copy">
     <p class="eyebrow"><span class="mini-star" aria-hidden="true">${icon('sparkle')}</span> JOINVILLE • SC <span class="eyebrow-separator">/</span> FEITO PRA SORRIR</p>
-    <h1 id="hero-title">${heading('TÁ RACHANDO')}${heading('O BICO')}<span class="hero-last-line">${heading('DE FOME?')}</span></h1>
-    <p class="hero-sub">Então pede um Smile.</p>
+    <h1 id="hero-title">${heading('A FELICIDADE')}${heading('EM FORMA DE')}<span class="hero-last-line">${heading('HAMBÚRGUER')}</span></h1>
+    <p class="hero-sub">Mordeu, Sorriu!</p>
     <div class="hero-actions">${order('PEDIR AGORA','hero')}<a class="text-link" href="#favoritos">VER OS FAVORITOS ${icon('down')}</a></div>
     <p class="hours">SEGUNDA A SEXTA <span aria-hidden="true">•</span> DELIVERY • 19H–23H</p>
   </div>
   <div class="hero-art" data-depth="hero">
     <div class="hero-halo" aria-hidden="true"></div>
-    <div class="hero-photo"><img src="assets/hero-gargalhada.webp" alt="Gargalhada: burger artesanal com cheddar, bacon e abacaxi tostado" width="1000" height="878" fetchpriority="high" decoding="async"></div>
+    <div class="hero-photo"><img src="assets/hero-gargalhada.webp" alt="Hambúrguer artesanal Gargalhada com cheddar, bacon e abacaxi tostado — O Smile Burger em Joinville" width="1000" height="878" fetchpriority="high" decoding="async"></div>
     <span class="hero-sticker"><small>ARTESANAL</small><b>ATÉ O<br>ÚLTIMO<br>SORRISO.</b><small>${icon('star')} JOINVILLE ${icon('star')}</small></span>
     <span class="hero-note">fome de respeito.<br>sorriso garantido.</span>
     <span class="hero-spark" aria-hidden="true">${icon('burst')}</span>
